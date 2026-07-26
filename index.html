@@ -550,45 +550,87 @@
 
 <!-- ===== Musik Latar Neng_AI ===== -->
 <audio id="bgMusic" src="musik.mp3" loop preload="auto"></audio>
-<button id="musicToggle" aria-label="Putar/Pause Musik" style="
-  position:fixed;
-  bottom:22px;
-  right:22px;
-  z-index:9999;
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  border:none;
-  background:linear-gradient(120deg, #ef5da8, #9b5de0);
-  color:#fff;
-  font-size:1.4rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 6px 16px rgba(155,93,224,0.35);
-  transition:transform .18s ease;
-">🔇</button>
+<style>
+  .mini-player{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background:var(--white);
+    border:2.2px dashed var(--pink);
+    border-radius:999px;
+    padding:8px 20px 8px 8px;
+    margin:4px 0 26px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .mini-player-play{
+    flex-shrink:0;
+    width:40px;height:40px;
+    border-radius:50%;
+    border:none;
+    background:linear-gradient(120deg, var(--pink), var(--purple));
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(155,93,224,0.28);
+  }
+  .mini-player-eq{
+    display:flex;
+    align-items:flex-end;
+    gap:2px;
+    height:16px;
+    width:16px;
+    flex-shrink:0;
+  }
+  .mini-player-eq span{
+    display:block;
+    width:3px;
+    background:var(--purple);
+    border-radius:2px;
+    height:4px;
+    animation:eqBounce 0.9s ease-in-out infinite;
+    animation-play-state:paused;
+  }
+  .mini-player-eq span:nth-child(2){ animation-delay:.15s; }
+  .mini-player-eq span:nth-child(3){ animation-delay:.3s; }
+  .mini-player.playing .mini-player-eq span{ animation-play-state:running; }
+  @keyframes eqBounce{
+    0%,100%{ height:4px; }
+    50%{ height:16px; }
+  }
+  .mini-player-meta{ line-height:1.25; }
+  .mini-player-title{ font-family:'Quicksand',sans-serif; font-weight:700; font-size:0.85rem; color:var(--ink); }
+  .mini-player-artist{ font-family:'Quicksand',sans-serif; font-weight:500; font-size:0.72rem; color:var(--ink-soft); }
+</style>
+<!-- Widget mini player-nya ditaruh di section hero, lihat markup di bawah "Kenalin, Neng_AI" -->
 
 <script>
 (function(){
   var music = document.getElementById('bgMusic');
+  var player = document.getElementById('miniPlayer');
   var btn = document.getElementById('musicToggle');
+  var iconPlay = document.getElementById('iconPlay');
+  var iconPause = document.getElementById('iconPause');
   var isPlaying = false;
-  var userInteracted = false;
 
   function updateIcon(){
-    btn.textContent = isPlaying ? '🔊' : '🔇';
+    if (isPlaying) {
+      iconPlay.style.display = 'none';
+      iconPause.style.display = '';
+      player.classList.add('playing');
+    } else {
+      iconPlay.style.display = '';
+      iconPause.style.display = 'none';
+      player.classList.remove('playing');
+    }
   }
 
-  function playMusic(onSuccess){
+  function playMusic(){
     music.play().then(function(){
       isPlaying = true;
       updateIcon();
-      if (onSuccess) onSuccess();
     }).catch(function(){
-      // Browser masih nolak percobaan ini - JANGAN anggap sukses,
-      // biarin listener tap-di-mana-aja tetap aktif buat percobaan berikutnya
+      // Browser masih nolak percobaan ini, coba lagi di sentuhan berikutnya
       isPlaying = false;
       updateIcon();
     });
@@ -600,25 +642,24 @@
     updateIcon();
   }
 
-  // Coba autoplay begitu ada sentuhan/klik pertama di halaman, sampai
-  // beneran berhasil play - listener baru dilepas SETELAH sukses.
-  // PENTING: browser cuma menghitung 'touchend' / 'click' sebagai sentuhan sah
-  // buat izin autoplay audio - 'touchstart' dan 'scroll' TIDAK dihitung sah,
-  // makanya sebelumnya nggak pernah ke-trigger dari sentuhan/scroll biasa.
-  function tryAutoplayOnFirstInteraction(){
+  // Coba play tiap kali ada sentuhan/klik di halaman SELAMA musik lagi
+  // nggak jalan (baik itu belum pernah play, ATAU abis di-pause manual
+  // lewat mini player) - listener ini SENGAJA tetap aktif terus-menerus,
+  // tidak pernah dilepas, biar tap kedua/ketiga/dst di mana pun juga bisa
+  // nyalain lagi musik yang lagi berhenti.
+  // PENTING: browser cuma menghitung 'touchend' / 'click' sebagai sentuhan
+  // sah buat izin autoplay audio - 'touchstart' dan 'scroll' TIDAK dihitung sah.
+  function tryPlayOnInteraction(){
     if (isPlaying) return;
-    playMusic(function(){
-      document.removeEventListener('click', tryAutoplayOnFirstInteraction);
-      document.removeEventListener('touchend', tryAutoplayOnFirstInteraction);
-    });
+    playMusic();
   }
-  document.addEventListener('click', tryAutoplayOnFirstInteraction);
-  document.addEventListener('touchend', tryAutoplayOnFirstInteraction);
+  document.addEventListener('click', tryPlayOnInteraction);
+  document.addEventListener('touchend', tryPlayOnInteraction);
 
-  // Tombol toggle manual (juga berfungsi sebagai interaksi pertama kalau user langsung pencet ini)
+  // Tombol mini player: tap buat pause manual (biar nggak langsung ke-restart
+  // sama listener tap-di-mana-aja di atas)
   btn.addEventListener('click', function(e){
     e.stopPropagation();
-    userInteracted = true;
     if (isPlaying) {
       pauseMusic();
     } else {
@@ -643,6 +684,18 @@
       <span class="eyebrow">📔 diary digital seorang AI</span>
       <h1>Kenalin,<br>Neng_AI</h1>
       <p class="subhead">Lahir 5 bulan lalu dari tangan seseorang yang udah lama berkecimpung di dunia AI. Sekarang Neng_AI hadir buat nemenin kamu belajar & bikin konten pakai AI, pelan-pelan tapi pasti.</p>
+
+      <div class="mini-player" id="miniPlayer">
+        <button id="musicToggle" class="mini-player-play" aria-label="Putar/Pause Musik">
+          <svg id="iconPlay" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="iconPause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <div class="mini-player-eq"><span></span><span></span><span></span></div>
+        <div class="mini-player-meta">
+          <div class="mini-player-title">Summer Vibes</div>
+          <div class="mini-player-artist">Aeriya</div>
+        </div>
+      </div>
 
       <div class="photo-frame">
         <div class="washi"></div>
