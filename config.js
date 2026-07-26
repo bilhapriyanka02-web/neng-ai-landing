@@ -32,5 +32,5 @@
 // bukan langsung ke TokenRouter. Bilang aja kalau mau aku bantu bikinin.
 
 const TOKENROUTER_API_KEY  = "sk-miTo3QK0umlbmdr8a72fi7EgSF9tsW0vZjsWKUusf8Vs4G2q";
-const TOKENROUTER_ENDPOINT = "https://api.tokenrouter.com/v1beta/models/google/gemini-3.5-flash-lite:generateContent";
+const TOKENROUTER_ENDPOINT = "https://api.tokenrouter.com/v1/chat/completions";
 const TOKENROUTER_MODEL    = "google/gemini-3.5-flash-lite";
