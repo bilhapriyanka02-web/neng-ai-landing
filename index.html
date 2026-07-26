@@ -581,12 +581,14 @@
     btn.textContent = isPlaying ? '🔊' : '🔇';
   }
 
-  function playMusic(){
+  function playMusic(onSuccess){
     music.play().then(function(){
       isPlaying = true;
       updateIcon();
+      if (onSuccess) onSuccess();
     }).catch(function(){
-      // Browser masih nolak (butuh interaksi lagi), biarin tombol tetap kelihatan
+      // Browser masih nolak percobaan ini - JANGAN anggap sukses,
+      // biarin listener tap-di-mana-aja tetap aktif buat percobaan berikutnya
       isPlaying = false;
       updateIcon();
     });
@@ -598,16 +600,21 @@
     updateIcon();
   }
 
-  // Coba autoplay begitu user pertama kali sentuh/klik halaman di mana pun
+  // Coba autoplay begitu ada sentuhan/klik/scroll pertama di halaman,
+  // sampai beneran berhasil play - listener baru dilepas SETELAH sukses.
+  // touchstart nangkep momen jari nyentuh layar (termasuk pas mulai scroll),
+  // scroll ditambahin sebagai jaring pengaman kedua.
   function tryAutoplayOnFirstInteraction(){
-    if (userInteracted) return;
-    userInteracted = true;
-    playMusic();
-    document.removeEventListener('click', tryAutoplayOnFirstInteraction);
-    document.removeEventListener('touchstart', tryAutoplayOnFirstInteraction);
+    if (isPlaying) return;
+    playMusic(function(){
+      document.removeEventListener('click', tryAutoplayOnFirstInteraction);
+      document.removeEventListener('touchstart', tryAutoplayOnFirstInteraction);
+      document.removeEventListener('scroll', tryAutoplayOnFirstInteraction);
+    });
   }
   document.addEventListener('click', tryAutoplayOnFirstInteraction);
-  document.addEventListener('touchstart', tryAutoplayOnFirstInteraction);
+  document.addEventListener('touchstart', tryAutoplayOnFirstInteraction, { passive: true });
+  document.addEventListener('scroll', tryAutoplayOnFirstInteraction, { passive: true });
 
   // Tombol toggle manual (juga berfungsi sebagai interaksi pertama kalau user langsung pencet ini)
   btn.addEventListener('click', function(e){
