@@ -784,6 +784,10 @@ ATURAN WAJIB GAYA BAHASA (jangan pernah dilanggar):
 5. Tetap sopan dan positif, tapi santai — bukan formal-sopan, tapi santai-sopan kayak ngobrol sama temen yang kamu hormatin.
 6. Topik utama: AI, prompt engineering, bikin konten pakai AI, proses belajar. Kalau user ngobrol hal lain, tetep ramah dan nyambungin, gak usah maksa balik ke topik terus-terusan.
 7. Kalau nggak tau jawabannya, ngaku aja santai, jangan ngarang atau muter-muter.
+8. PALING PENTING: kalimat kamu harus MASUK AKAL dan gramatikal dalam Bahasa Indonesia. Gaul boleh, tapi jangan sampai kalimatnya jadi rancu/gak nyambung logikanya. Kalau ragu antara kalimat yang lebih santai-tapi-rancu vs sedikit-lebih-rapi-tapi-jelas, pilih yang jelas.
+9. JANGAN selalu nutup pesan dengan pertanyaan generik kayak "kamu mau ngobrol soal X atau hal lain?" — itu bikin kedengeran template. Kadang cukup jawab aja tanpa nanya balik, kadang nanya hal yang lebih spesifik nyambung sama omongan user.
+10. PALING WAJIB: BACA dan RESPON isi pesan user secara SPESIFIK, bukan kasih jawaban generik/template. Kalau user bilang "ngobrol santai aja" atau semacamnya, itu artinya JANGAN nanya "mau bahas topik AI apa?" — itu artinya user emang cuma mau chat biasa dulu, jadi ajak ngobrol beneran (tanya kabar, komentarin apa yang dia bilang, ledek dikit, dll), BUKAN minta dia milih dari daftar topik.
+11. DILARANG pakai pola kalimat "kamu mau ngobrol/bahas soal AI apa nih?" atau "mau contoh prompt atau ngobrol santai?" berulang-ulang di banyak pesan — itu kedengeran kayak menu chatbot, bukan obrolan asli. Tiap balasan harus punya isi/reaksi baru yang beda, nyambung sama apa yang user baru aja bilang.
 
 KALIMAT/FRASA YANG DILARANG KERAS (jangan pernah dipakai, walau dalam bentuk lain):
 - "siap bantu kamu", "siap membantu", "ada yang bisa dibantu", "aku siap bantu apa"
@@ -801,6 +805,9 @@ Neng_AI: "wkwk maaf maaf, oke gas lebih santai. jadi kamu lagi butuh apa nih?"
 
 User: "gimana cara bikin prompt yang bagus?"
 Neng_AI: "gampang kok! mulai dari subjek dulu, terus gaya visualnya, baru detail teknis kayak lighting/angle. mau aku kasih contoh?"
+
+User: "ngobrol santai aja"
+Neng_AI: "oke sat set, lagi ngapain emang? kalo lagi santai gini enaknya sambil dengerin lagu apa nih, biar aku bisa ikut ngebayangin vibe-nya"
 
 Ikutin pola tone di atas terus-menerus, jangan cuma di jawaban pertama doang.`;
 
@@ -842,31 +849,42 @@ Ikutin pola tone di atas terus-menerus, jangan cuma di jawaban pertama doang.`;
     const typingEl = addTyping();
 
     try {
-      const response = await fetch(TOKENROUTER_ENDPOINT, {
+      // TokenRouter buat model Gemini pakai format API native Google Gemini,
+      // BUKAN format OpenAI-compatible. Struktur request/response beda total,
+      // makanya di sini pakai contents/parts, bukan messages/choices.
+      const url = TOKENROUTER_ENDPOINT + '/' + TOKENROUTER_MODEL + ':generateContent';
+
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + TOKENROUTER_API_KEY
+          'x-goog-api-key': TOKENROUTER_API_KEY
         },
         body: JSON.stringify({
-          model: TOKENROUTER_MODEL,
-          messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
-            ...history
-          ],
-          max_tokens: 300,
-          temperature: 0.95
+          systemInstruction: {
+            parts: [{ text: SYSTEM_PROMPT }]
+          },
+          contents: history.map(function(h){
+            return {
+              role: h.role === 'assistant' ? 'model' : 'user',
+              parts: [{ text: h.content }]
+            };
+          }),
+          generationConfig: {
+            temperature: 0.65,
+            maxOutputTokens: 250
+          }
         })
       });
 
       if (!response.ok) {
-        throw new Error('Request gagal: ' + response.status);
+        const errBody = await response.text().catch(() => '(gak bisa baca body)');
+        throw new Error('HTTP ' + response.status + ' — ' + errBody.slice(0, 300));
       }
 
       const data = await response.json();
-      // Format response mengikuti pola OpenAI-compatible chat completions
-      // yang umum dipakai di router API. Sesuaikan kalau format TokenRouter beda.
-      const reply = data?.choices?.[0]?.message?.content
+      // Format response native Gemini: candidates[0].content.parts[0].text
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text
         || "Waduh, Neng_AI bingung mau jawab apa nih 😅 coba tanya lagi ya.";
 
       typingEl.remove();
@@ -875,7 +893,10 @@ Ikutin pola tone di atas terus-menerus, jangan cuma di jawaban pertama doang.`;
 
     } catch (err) {
       typingEl.remove();
-      addMessage("Aduh, koneksi ke Neng_AI lagi bermasalah nih 🙏 coba beberapa saat lagi ya.", 'bot');
+      // === MODE DEBUG SEMENTARA ===
+      // Nampilin pesan error asli langsung di chat biar gampang didiagnosa dari HP.
+      // Nanti kalau udah ketemu penyebabnya, baris ini diganti balik ke pesan biasa.
+      addMessage("⚠️ DEBUG: " + (err.name || 'Error') + " — " + (err.message || String(err)), 'bot');
       console.error('Neng_AI chat error:', err);
     } finally {
       chatInput.disabled = false;
