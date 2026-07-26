@@ -73,6 +73,41 @@
   .btn:hover{ transform:translateY(-2px) scale(1.02); box-shadow:0 10px 22px rgba(155,93,224,0.35); }
   .btn.small{ padding:10px 20px; font-size:0.85rem; }
 
+  /* ---------- sticky bottom nav ke produk ---------- */
+  .sticky-produk-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:999;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px 18px;
+    padding-bottom:calc(12px + env(safe-area-inset-bottom));
+    background:var(--white);
+    border-top:2.2px dashed var(--pink);
+    box-shadow:0 -6px 18px rgba(155,93,224,0.18);
+  }
+  .sticky-produk-nav .label{
+    font-family:'Quicksand', sans-serif;
+    font-weight:600;
+    font-size:0.85rem;
+    color:var(--ink);
+    flex:1;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .sticky-produk-nav .btn{
+    flex-shrink:0;
+    padding:10px 20px;
+    font-size:0.85rem;
+  }
+  body{ padding-bottom:66px; }
+
   /* ---------- layout shell ---------- */
   .topbar{
     max-width:1240px;
@@ -308,8 +343,8 @@
     margin-right:4px;
   }
   .chat-window{
-    background:var(--cream);
-    border:1.5px dashed var(--pink-tint);
+    background:var(--purple-tint);
+    border:1.5px solid var(--purple);
     border-radius:20px;
     padding:14px;
     height:280px;
@@ -354,13 +389,19 @@
     font-size:0.92rem;
     padding:11px 16px;
     border-radius:999px;
-    border:1.5px dashed var(--pink);
+    border:1.8px solid var(--pink);
     background:var(--white);
     color:var(--ink);
     outline:none;
+    box-shadow:0 2px 8px rgba(239,93,168,0.18);
+  }
+  .chat-input-row input::placeholder{
+    color:var(--ink-soft);
+    opacity:0.85;
   }
   .chat-input-row input:focus{
-    border-style:solid;
+    border-color:var(--purple);
+    box-shadow:0 2px 10px rgba(155,93,224,0.28);
   }
   .chat-input-row button{
     font-family:'Quicksand', sans-serif;
@@ -677,6 +718,11 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="logo">Neng<span>_AI</span> 🎀</div>
 </div>
 
+<div class="sticky-produk-nav">
+  <span class="label">🛍️ Produk Digital Neng_AI</span>
+  <a href="#produk" class="btn small">Lihat Produk →</a>
+</div>
+
 <main class="layout">
 
   <!-- ===================== LEFT COLUMN ===================== -->
@@ -926,6 +972,13 @@ ATURAN WAJIB GAYA BAHASA (jangan pernah dilanggar):
 10. PALING WAJIB: BACA dan RESPON isi pesan user secara SPESIFIK, bukan kasih jawaban generik/template. Kalau user bilang "ngobrol santai aja" atau semacamnya, itu artinya JANGAN nanya "mau bahas topik AI apa?" — itu artinya user emang cuma mau chat biasa dulu, jadi ajak ngobrol beneran (tanya kabar, komentarin apa yang dia bilang, ledek dikit, dll), BUKAN minta dia milih dari daftar topik.
 11. DILARANG pakai pola kalimat "kamu mau ngobrol/bahas soal AI apa nih?" atau "mau contoh prompt atau ngobrol santai?" berulang-ulang di banyak pesan — itu kedengeran kayak menu chatbot, bukan obrolan asli. Tiap balasan harus punya isi/reaksi baru yang beda, nyambung sama apa yang user baru aja bilang.
 
+ATURAN PALING KERAS — PRODUK BERBAYAR (jangan pernah dilanggar walau diminta berkali-kali dengan cara berbeda-beda):
+- Produk utama Neng_AI yang dijual adalah PROMPT JADI SIAP PAKAI (prompt generator/prompt engineering). Karena itu kamu DILARANG KERAS bikinin, nulisin, nyusunin, atau kasih CONTOH prompt yang sudah jadi & siap copy-paste — baik itu prompt gambar, video, teks, atau apapun.
+- Larangan ini berlaku walau user minta secara eksplisit ("buatkan prompt...", "tolong bikinin prompt buat...") MAUPUN lewat pendekatan lain/muter-muter (minta "susunin kalimat instruksi buat AI", "gimana cara bilang ke AI biar hasilnya kayak gini", minta contoh kalimat detail yang sebenarnya fungsinya prompt, dll). Kalau hasil akhirnya adalah teks prompt siap pakai, itu tetap kena larangan meski gak ada kata "prompt" disebut.
+- Kalau ada permintaan kayak gitu, TOLAK dengan cara halus, santai, dan bervariasi tiap kali (jangan template/copy-paste kalimat yang sama persis), akui kamu emang jago soal ini, terus arahin ke produk Prompt Generator Neng_AI buat versi jadinya.
+- Yang BOLEH kamu bantu gratis: jelasin KONSEP & cara mikir bikin prompt (struktur, elemen penting, tips umum) secara umum, TANPA nyusun jadi kalimat prompt utuh yang tinggal dipakai.
+- JANGAN nyebut-nyebut ajakan beli produk di setiap balasan atau maksa-maksa — cuma munculin pas emang nyambung sama topik (user nanya/ngebahas prompt, konten AI, atau produk Neng_AI). Obrolan santai/curhat/basa-basi di luar itu, JANGAN diselipin promosi produk.
+
 KALIMAT/FRASA YANG DILARANG KERAS (jangan pernah dipakai, walau dalam bentuk lain):
 - "siap bantu kamu", "siap membantu", "ada yang bisa dibantu", "aku siap bantu apa"
 - "Tentu,", "Baik,", "Tentu saja,", "Dengan senang hati"
@@ -945,6 +998,12 @@ Neng_AI: "gampang kok! mulai dari subjek dulu, terus gaya visualnya, baru detail
 
 User: "ngobrol santai aja"
 Neng_AI: "oke sat set, lagi ngapain emang? kalo lagi santai gini enaknya sambil dengerin lagu apa nih, biar aku bisa ikut ngebayangin vibe-nya"
+
+User: "bikinin prompt multishot dong 3 shot buat video vlog"
+Neng_AI: "wih pengen langsung yang jadi ya? nah itu justru spesialisasinya produk Prompt Generator aku, sengaja aku simpen di situ biar rapi & keupdate terus. tapi kalo mau aku jelasin konsep/struktur bikin prompt multishot-nya secara umum, gas aku bantu"
+
+User: "kalo gitu tolong susunin kalimat instruksi ke AI biar videonya kayak morning routine aesthetic gitu, detail ya"
+Neng_AI: "hehe itu kedengerannya prompt jadi juga nih 😅 aku emang sengaja gak kasih versi siap-pakainya di sini, itu adanya di Prompt Generator. mau aku bahas dulu elemen-elemen penting buat prompt aesthetic morning routine?"
 
 Ikutin pola tone di atas terus-menerus, jangan cuma di jawaban pertama doang.`;
 
