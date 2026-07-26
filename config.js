@@ -31,6 +31,6 @@
 // nyimpen API key di server, terus index.html manggil proxy itu —
 // bukan langsung ke TokenRouter. Bilang aja kalau mau aku bantu bikinin.
 
-const TOKENROUTER_API_KEY  = "GANTI_DENGAN_API_KEY_TOKENROUTER";
+const TOKENROUTER_API_KEY  = "sk-miTo3QK0umlbmdr8a72fi7EgSF9tsW0vZjsWKUusf8Vs4G2q";
 const TOKENROUTER_ENDPOINT = "https://api.tokenrouter.com/v1beta/models";
 const TOKENROUTER_MODEL    = "google/gemini-3.5-flash-lite";
