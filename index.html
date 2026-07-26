@@ -600,21 +600,20 @@
     updateIcon();
   }
 
-  // Coba autoplay begitu ada sentuhan/klik/scroll pertama di halaman,
-  // sampai beneran berhasil play - listener baru dilepas SETELAH sukses.
-  // touchstart nangkep momen jari nyentuh layar (termasuk pas mulai scroll),
-  // scroll ditambahin sebagai jaring pengaman kedua.
+  // Coba autoplay begitu ada sentuhan/klik pertama di halaman, sampai
+  // beneran berhasil play - listener baru dilepas SETELAH sukses.
+  // PENTING: browser cuma menghitung 'touchend' / 'click' sebagai sentuhan sah
+  // buat izin autoplay audio - 'touchstart' dan 'scroll' TIDAK dihitung sah,
+  // makanya sebelumnya nggak pernah ke-trigger dari sentuhan/scroll biasa.
   function tryAutoplayOnFirstInteraction(){
     if (isPlaying) return;
     playMusic(function(){
       document.removeEventListener('click', tryAutoplayOnFirstInteraction);
-      document.removeEventListener('touchstart', tryAutoplayOnFirstInteraction);
-      document.removeEventListener('scroll', tryAutoplayOnFirstInteraction);
+      document.removeEventListener('touchend', tryAutoplayOnFirstInteraction);
     });
   }
   document.addEventListener('click', tryAutoplayOnFirstInteraction);
-  document.addEventListener('touchstart', tryAutoplayOnFirstInteraction, { passive: true });
-  document.addEventListener('scroll', tryAutoplayOnFirstInteraction, { passive: true });
+  document.addEventListener('touchend', tryAutoplayOnFirstInteraction);
 
   // Tombol toggle manual (juga berfungsi sebagai interaksi pertama kalau user langsung pencet ini)
   btn.addEventListener('click', function(e){
