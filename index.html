@@ -159,7 +159,6 @@
     .hero .photo-frame img{ height:220px; }
     .origin .photo-frame img{ height:150px; }
     .gallery-grid .photo-frame img{ height:110px; }
-    .gallery-grid .photo-frame video{ height:auto; aspect-ratio:16/9; object-fit:cover; }
 
     /* --- produk digayain ala "Behind The Scenes" (foto tali) di mobile --- */
     #produk .section-title, #webapp .section-title{ font-size:1.9rem; }
@@ -470,8 +469,8 @@
   .gallery-title{ font-size:1.9rem; margin-bottom:16px; }
   .gallery-grid{
     display:grid;
-    grid-template-columns:1fr;
-    gap:20px;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
   }
   .gallery-grid .photo-frame{ width:100%; transform:none; }
   .gallery-grid .photo-frame img{ height:190px; object-fit:cover; object-position:top center; }
@@ -486,6 +485,10 @@
   .gallery-grid .g1 .sticker{ top:-12px; right:-10px; transform:rotate(10deg); }
   .gallery-grid .g2 .sticker{ top:-12px; left:-10px; transform:rotate(-10deg); }
   .gallery-grid .g3 .sticker{ top:-12px; right:-10px; transform:rotate(-8deg); }
+  @media (max-width:640px){
+    .gallery-grid{ grid-template-columns:1fr; gap:20px; }
+    .gallery-grid .photo-frame video{ height:auto; aspect-ratio:16/9; object-fit:cover; }
+  }
 
   /* ================= VALUE PROPS ================= */
   .values-grid{
