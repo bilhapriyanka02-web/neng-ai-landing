@@ -73,40 +73,6 @@
   .btn:hover{ transform:translateY(-2px) scale(1.02); box-shadow:0 10px 22px rgba(155,93,224,0.35); }
   .btn.small{ padding:10px 20px; font-size:0.85rem; }
 
-  /* ---------- sticky bottom nav ke produk ---------- */
-  .sticky-produk-nav{
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    z-index:999;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding:12px 18px;
-    padding-bottom:calc(12px + env(safe-area-inset-bottom));
-    background:var(--white);
-    border-top:2.2px dashed var(--pink);
-    box-shadow:0 -6px 18px rgba(155,93,224,0.18);
-  }
-  .sticky-produk-nav .label{
-    font-family:'Quicksand', sans-serif;
-    font-weight:600;
-    font-size:0.85rem;
-    color:var(--ink);
-    flex:1;
-    min-width:0;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-  }
-  .sticky-produk-nav .btn{
-    flex-shrink:0;
-    padding:10px 20px;
-    font-size:0.85rem;
-  }
-  body{ padding-bottom:66px; }
 
   /* ---------- layout shell ---------- */
   .topbar{
@@ -135,101 +101,8 @@
     align-items:start;
   }
 
-  @media (max-width:900px){
-    .layout{ grid-template-columns:1fr; gap:56px; }
-  }
-
-  /* ---------- mobile-only: pendekin scroll + majuin section produk ---------- */
-  @media (max-width:640px){
-    /* .col-left & .col-right dibikin "transparan" secara layout supaya
-       section-section di dalamnya bisa direorder langsung lewat .layout (grid) */
-    .col-left, .col-right{ display:contents; }
-
-    .hero{ order:1; }
-    #webapp{ order:2; }
-    .chat-neng{ order:3; }
-    #produk{ order:4; }
-    .origin{ order:5; }
-    .gallery{ order:6; }
-    .values{ order:7; }
-    .tips{ order:8; }
-
-    section{ margin-bottom:32px; }
-
-    .hero .photo-frame img{ height:220px; }
-    .origin .photo-frame img{ height:150px; }
-    .gallery-grid .photo-frame img{ height:110px; }
-
-    /* --- produk digayain ala "Behind The Scenes" (foto tali) di mobile --- */
-    #produk .section-title, #webapp .section-title{ font-size:1.9rem; }
-
-    #produk .products-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-    #webapp .products-grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:16px;
-      max-width:280px;
-      margin:0 auto;
-    }
-
-    #produk .product-card, #webapp .product-card{
-      background:var(--white);
-      border:2.2px dashed var(--pink);
-      border-radius:26px;
-      padding:10px 10px 18px;
-      transform:none;
-    }
-    #produk .product-card.purple-dash, #webapp .product-card.purple-dash{ border-color:var(--purple); }
-    #produk .product-card:nth-child(1){ transform:rotate(-3deg); }
-    #produk .product-card:nth-child(2){ transform:rotate(2deg); }
-    #produk .product-card:nth-child(3){ transform:rotate(-2deg); }
-    #produk .product-card:nth-child(4){ transform:rotate(3deg); }
-
-    #produk .product-photo-wrap, #webapp .product-photo-wrap{
-      margin:0 0 10px;
-      padding:0;
-      background:transparent;
-      border-radius:16px;
-      overflow:visible;
-    }
-    #produk .product-photo-wrap img, #webapp .product-photo-wrap img{
-      height:120px;
-      object-fit:cover;
-      border-radius:14px;
-    }
-    #produk .product-photo-wrap .sticker, #webapp .product-photo-wrap .sticker{
-      width:30px; height:30px; font-size:0.95rem;
-      top:-10px; left:8px;
-    }
-    #produk .product-photo-wrap .washi, #webapp .product-photo-wrap .washi{
-      top:-8px; right:10px; width:44px; height:14px;
-    }
-
-    #produk .product-body, #webapp .product-body{ text-align:center; }
-    #produk .product-body h3, #webapp .product-body h3{
-      font-family:'Caveat', cursive;
-      font-weight:700;
-      font-size:1.2rem;
-      line-height:1.2;
-      margin-bottom:8px;
-    }
-    #produk .product-body p{ display:none; }
-    #webapp .product-body p{
-      font-size:0.85rem;
-      margin-bottom:10px;
-    }
-    #produk .btn.small, #webapp .btn.small{
-      display:block;
-      width:100%;
-      padding:8px 6px;
-      font-size:0.72rem;
-      letter-spacing:-0.01em;
-    }
-  }
+  /* ---------- selalu tampilan desktop, di HP maupun komputer ---------- */
+  body{ min-width:1240px; }
 
   section{ margin-bottom:52px; }
   section:last-child{ margin-bottom:0; }
@@ -485,10 +358,6 @@
   .gallery-grid .g1 .sticker{ top:-12px; right:-10px; transform:rotate(10deg); }
   .gallery-grid .g2 .sticker{ top:-12px; left:-10px; transform:rotate(-10deg); }
   .gallery-grid .g3 .sticker{ top:-12px; right:-10px; transform:rotate(-8deg); }
-  @media (max-width:640px){
-    .gallery-grid{ grid-template-columns:1fr; gap:20px; }
-    .gallery-grid .photo-frame video{ height:auto; aspect-ratio:16/9; object-fit:cover; }
-  }
 
   /* ================= VALUE PROPS ================= */
   .values-grid{
@@ -496,7 +365,6 @@
     grid-template-columns:repeat(3,1fr);
     gap:16px;
   }
-  @media (max-width:520px){ .values-grid{ grid-template-columns:1fr; } }
   .value-card{ text-align:center; padding:20px 14px; }
   .value-card .emoji{ font-size:1.8rem; display:block; margin-bottom:8px; }
   .value-card h3{ font-family:'Quicksand', sans-serif; font-weight:700; font-size:1.02rem; margin-bottom:6px; }
@@ -742,11 +610,6 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="logo">Neng<span>_AI</span> 🎀</div>
 </div>
 
-<div class="sticky-produk-nav">
-  <span class="label">🛍️ Produk Digital Neng_AI</span>
-  <a href="#produk" class="btn small">Lihat Produk →</a>
-</div>
-
 <main class="layout">
 
   <!-- ===================== LEFT COLUMN ===================== -->
@@ -781,6 +644,8 @@ document.addEventListener('DOMContentLoaded', function(){
         <a href="#produk" class="btn">Yuk Mulai Belajar Bareng Aku →</a>
       </div>
     </section>
+
+    
 
     <section id="webapp" class="products webapp-section">
       <h2 class="hand section-title">Web App Neng_AI 🐼</h2>
