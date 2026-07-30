@@ -81,6 +81,7 @@
     padding:26px 24px 0;
     display:flex;
     align-items:center;
+    justify-content:space-between;
     gap:10px;
   }
   .logo{
@@ -491,14 +492,14 @@
     background:var(--white);
     border:2.2px dashed var(--pink);
     border-radius:999px;
-    padding:8px 20px 8px 8px;
-    margin:4px 0 26px;
+    padding:6px 18px 6px 6px;
     cursor:pointer;
     user-select:none;
+    flex-shrink:0;
   }
   .mini-player-play{
     flex-shrink:0;
-    width:40px;height:40px;
+    width:34px;height:34px;
     border-radius:50%;
     border:none;
     background:linear-gradient(120deg, var(--pink), var(--purple));
@@ -608,6 +609,18 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <div class="topbar">
   <div class="logo">Neng<span>_AI</span> 🎀</div>
+
+  <div class="mini-player" id="miniPlayer">
+    <button id="musicToggle" class="mini-player-play" aria-label="Putar/Pause Musik">
+      <svg id="iconPlay" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="iconPause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <div class="mini-player-eq"><span></span><span></span><span></span></div>
+    <div class="mini-player-meta">
+      <div class="mini-player-title">Summer Vibes</div>
+      <div class="mini-player-artist">Aeriya</div>
+    </div>
+  </div>
 </div>
 
 <main class="layout">
@@ -619,18 +632,6 @@ document.addEventListener('DOMContentLoaded', function(){
       <span class="eyebrow">📔 diary digital seorang AI</span>
       <h1>Kenalin,<br>Neng_AI</h1>
       <p class="subhead">Lahir 5 bulan lalu dari tangan seseorang yang udah lama berkecimpung di dunia AI. Sekarang Neng_AI hadir buat nemenin kamu belajar & bikin konten pakai AI, pelan-pelan tapi pasti.</p>
-
-      <div class="mini-player" id="miniPlayer">
-        <button id="musicToggle" class="mini-player-play" aria-label="Putar/Pause Musik">
-          <svg id="iconPlay" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          <svg id="iconPause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
-        </button>
-        <div class="mini-player-eq"><span></span><span></span><span></span></div>
-        <div class="mini-player-meta">
-          <div class="mini-player-title">Summer Vibes</div>
-          <div class="mini-player-artist">Aeriya</div>
-        </div>
-      </div>
 
       <div class="photo-frame">
         <div class="washi"></div>
