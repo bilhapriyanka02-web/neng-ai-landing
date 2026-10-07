@@ -1,6 +1,6 @@
 // The permanent key stays in Vercel. Browsers receive a one-use Live token only.
 const MODEL = 'gemini-3.1-flash-live-preview';
-const origins = new Set(['https://neng-ai.cloud','https://www.neng-ai.cloud','https://neng-ai-portfolio.vercel.app']);
+const origins = new Set(['https://neng-ai.cloud','https://www.neng-ai.cloud','https://neng-ai-portfolio-neng-app.vercel.app']);
 const requests = new Map();
 export default async function handler(req, res) {
  const origin=req.headers.origin;
