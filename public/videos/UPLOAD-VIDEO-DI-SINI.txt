@@ -1,0 +1,15 @@
+Upload video MP4 ke folder ini dengan nama berikut:
+
+karya-01.mp4
+karya-02.mp4
+karya-03.mp4
+karya-04.mp4
+
+Tidak perlu mengubah JavaScript. Tombol putar pada setiap placeholder otomatis
+memuat video sesuai nama file di atas. Video tidak diunduh sebelum diklik.
+
+Gunakan MP4 dengan video H.264 dan audio AAC untuk kompatibilitas browser.
+Video portrait dan landscape ditampilkan utuh tanpa memotong gambar.
+Nama file case-sensitive: gunakan huruf kecil sesuai daftar.
+
+Jika ingin mengubah judul, edit teks Karya 01–04 di index.html.
