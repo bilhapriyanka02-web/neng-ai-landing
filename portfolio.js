@@ -8,7 +8,16 @@ const $ = id => document.getElementById(id);
 const pages = ['home','apps','media','about','chat'];
 function showPage(name) {
  if(!pages.includes(name)) name='home';
- pages.forEach(page=>{$(page).hidden=page!==name;});
+ pages.forEach(page=>{
+  const section=$(page);
+  const entering=page===name && section.hidden;
+  section.hidden=page!==name;
+  if(entering){
+   section.classList.remove('page-reveal');
+   void section.offsetWidth;
+   section.classList.add('page-reveal');
+  }
+ });
  document.querySelectorAll('.dock [data-page]').forEach(button=>{const selected=button.dataset.page===name;button.classList.toggle('active',selected);if(selected)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});
  if(name!=='media') $('mediaVideo').pause();
  else if(typeof mediaVideo!=='undefined' && mediaVideo.src)mediaVideo.play().catch(()=>{$('playMedia').hidden=false;});
