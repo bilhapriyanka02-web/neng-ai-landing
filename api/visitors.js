@@ -9,6 +9,14 @@ async function redis(command){
  return data.result;
 }
 export default async function handler(req,res){
+ const origin=req.headers.origin;
+ if(origin==='https://neng-ai.cloud'||origin==='https://www.neng-ai.cloud'){
+  res.setHeader('Access-Control-Allow-Origin',origin);
+  res.setHeader('Vary','Origin');
+  res.setHeader('Access-Control-Allow-Methods','GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers','Content-Type');
+ }
+ if(req.method==='OPTIONS')return res.status(204).end();
  res.setHeader('Cache-Control','no-store, max-age=0');
  if(!['GET','POST'].includes(req.method))return res.status(405).json({error:'Method not allowed'});
  if(!URL||!TOKEN)return res.status(503).json({error:'Visitor storage not configured'});

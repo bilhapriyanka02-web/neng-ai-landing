@@ -12,7 +12,7 @@
  }catch{visitorId=crypto.randomUUID();}
  async function refresh(first=false){
   try{
-   const response=await fetch('/api/visitors',{method:first?'POST':'GET',headers:{'Content-Type':'application/json'},body:first?JSON.stringify({visitorId}):undefined,cache:'no-store'});
+   const response=await fetch('https://neng-ai-portfolio-f28lp9pn3-neng-app.vercel.app/api/visitors',{method:first?'POST':'GET',headers:{'Content-Type':'application/json'},body:first?JSON.stringify({visitorId}):undefined,cache:'no-store'});
    if(!response.ok)throw Error('unavailable');
    const data=await response.json();
    if(!Number.isSafeInteger(data.total))throw Error('invalid');
