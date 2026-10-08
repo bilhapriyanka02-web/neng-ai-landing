@@ -83,3 +83,12 @@ $('aboutNext').addEventListener('click',()=>{story=1-story;$('aboutStory').repla
 let swipeStart;
 $('mediaPlaceholder').addEventListener('touchstart',e=>{swipeStart=e.touches[0].clientX;},{passive:true});
 $('mediaPlaceholder').addEventListener('touchend',e=>{const delta=e.changedTouches[0].clientX-swipeStart;if(Math.abs(delta)>55)selectMedia(delta<0?1:-1);},{passive:true});
+
+
+/* Route recovery if an older navigation handler fails after a cached update */
+window.addEventListener("hashchange",()=>{
+ const page=location.hash.slice(1);
+ if(!["home","apps","media","about","chat"].includes(page))return;
+ document.querySelectorAll("#stage > section.scene").forEach(section=>{section.hidden=section.id!==page});
+ document.querySelectorAll(".dock [data-page]").forEach(button=>button.classList.toggle("active",button.dataset.page===page));
+});
