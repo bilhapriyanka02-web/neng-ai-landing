@@ -34,3 +34,12 @@ Header menggunakan panda-head.png dari neng-app. Foto Neng diambil dari landing 
 ## Catatan operasional
 
 Token publik dibatasi origin dan model. Throttle server hanya per instance; kelola kuota/budget Gemini di Google project untuk traffic publik. Seluruh percakapan hanya berada di memori browser.
+
+## Ganti screenshot aplikasi
+
+Upload file JPG ke folder **public/images/** di repo ini:
+- **neng-app.jpg** — Neng-app
+- **aster-assistant.jpg** — Aster Assistant
+- **aster-gateway.jpg** — Aster Gateway
+
+Gunakan nama file persis, huruf kecil. Upload gambar JPG asli (jangan hanya mengganti ekstensi PNG menjadi JPG), lalu commit ke main. Sesudah deployment selesai, screenshot otomatis menggantikan ilustrasi. Foto tampil utuh tanpa dipotong; ketuk screenshot untuk membuka ukuran penuh. Jika belum tersedia atau gagal dimuat, ilustrasi tetap tampil. Untuk mengganti lagi, upload file baru dengan nama yang sama.
