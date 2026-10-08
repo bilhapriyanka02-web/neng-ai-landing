@@ -1,5 +1,5 @@
 // Native Gemini TokenRouter grounding with one server-only API key.
-const MODEL = 'gemini-3.5-flash';
+const MODEL = 'gemini-3.5-flash-lite';
 const ENDPOINT = `https://api.tokenrouter.com/v1beta/models/google/${MODEL}:generateContent`;
 const origins = new Set(['https://neng-ai.cloud','https://www.neng-ai.cloud','https://neng-ai-portfolio-neng-app.vercel.app']);
 const requests = new Map();
