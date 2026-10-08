@@ -1,7 +1,6 @@
 // Keep uploads with the same filename fresh across page visits, while reusing
 // each downloaded image when navigating within the current visit.
-const imageVisitVersion=Date.now().toString(36);
-const freshImageUrl=path=>path+'?v='+imageVisitVersion;
+const freshImageUrl=path=>path;
 document.querySelectorAll('img[data-refresh-image]').forEach(image=>{
  image.src=freshImageUrl(image.dataset.refreshImage);
 });
@@ -12,6 +11,7 @@ function showPage(name) {
  pages.forEach(page=>{$(page).hidden=page!==name;});
  document.querySelectorAll('.dock [data-page]').forEach(button=>{const selected=button.dataset.page===name;button.classList.toggle('active',selected);if(selected)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});
  if(name!=='media') $('mediaVideo').pause();
+ else if(typeof mediaVideo!=='undefined' && mediaVideo.src)mediaVideo.play().catch(()=>{$('playMedia').hidden=false;});
  if(location.hash!== '#'+name) history.replaceState(null,'','#'+name);
 }
 document.querySelectorAll('[data-page]').forEach(button=>button.addEventListener('click',()=>showPage(button.dataset.page)));
@@ -42,11 +42,19 @@ function selectApp(index){const app=apps[index];$('appCategory').textContent=app
 document.querySelectorAll('[data-app]').forEach(button=>button.addEventListener('click',()=>selectApp(Number(button.dataset.app))));
 document.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>{selectApp(Number(button.dataset.project));showPage('apps');}));selectApp(0);
 let mediaIndex=1;
-function selectMedia(delta){$('mediaVideo').pause();$('mediaVideo').removeAttribute('src');$('mediaVideo').load();mediaIndex=(mediaIndex-1+delta+4)%4+1;$('mediaNumber').textContent=String(mediaIndex).padStart(2,'0');$('filmIndex').textContent=String(mediaIndex).padStart(2,'0');$('mediaVideo').hidden=true;$('mediaPlaceholder').hidden=false;$('playMedia').hidden=false;$('mediaMessage').textContent='';$('mediaPlaceholder').dataset.variant=String(mediaIndex);document.querySelectorAll('[data-media]').forEach(button=>{const selected=Number(button.dataset.media)===mediaIndex;button.classList.toggle('selected',selected);button.setAttribute('aria-pressed',String(selected));});}
+const mediaVideo=$('mediaVideo');
+mediaVideo.muted=true;mediaVideo.loop=true;mediaVideo.playsInline=true;mediaVideo.preload='auto';
+function selectMedia(delta){$('mediaVideo').pause();mediaIndex=(mediaIndex-1+delta+4)%4+1;$('mediaNumber').textContent=String(mediaIndex).padStart(2,'0');$('filmIndex').textContent=String(mediaIndex).padStart(2,'0');$('mediaVideo').hidden=true;$('mediaPlaceholder').hidden=false;$('playMedia').hidden=false;$('mediaMessage').textContent='';$('mediaPlaceholder').dataset.variant=String(mediaIndex);document.querySelectorAll('[data-media]').forEach(button=>{const selected=Number(button.dataset.media)===mediaIndex;button.classList.toggle('selected',selected);button.setAttribute('aria-pressed',String(selected));});
+ const videoPath='public/videos/karya-'+String(mediaIndex).padStart(2,'0')+'.mp4';
+ if(mediaVideo.getAttribute('src')!==videoPath)mediaVideo.src=videoPath;
+ mediaVideo.hidden=false;$('mediaPlaceholder').hidden=true;$('playMedia').hidden=true;
+ if(!$('media').hidden)mediaVideo.play().catch(()=>{$('playMedia').hidden=false;});
+}
 $('mediaPlaceholder').dataset.variant='1';
+selectMedia(0);
 document.querySelectorAll('[data-media]').forEach(button=>button.addEventListener('click',()=>selectMedia(Number(button.dataset.media)-mediaIndex)));
 $('nextMedia').addEventListener('click',()=>selectMedia(1));$('previousMedia').addEventListener('click',()=>selectMedia(-1));
-$('playMedia').addEventListener('click',()=>{const video=$('mediaVideo');video.src='public/videos/karya-'+String(mediaIndex).padStart(2,'0')+'.mp4';video.hidden=false;$('mediaPlaceholder').hidden=true;$('playMedia').hidden=true;video.play().catch(()=>{});});
+$('playMedia').addEventListener('click',()=>{const video=$('mediaVideo');video.src='public/videos/karya-'+String(mediaIndex).padStart(2,'0')+'.mp4';video.hidden=false;$('mediaPlaceholder').hidden=true;$('playMedia').hidden=true;video.muted=false;video.controls=true;video.play().catch(()=>{});});
 $('mediaVideo').addEventListener('error',()=>{$('mediaVideo').hidden=true;$('mediaPlaceholder').hidden=false;$('playMedia').hidden=false;$('mediaMessage').textContent='Video ini belum tersedia. Karya lainnya bisa kamu lihat di TikTok Neng.';});
 let story=0;
 const stories=[
