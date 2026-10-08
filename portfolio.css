@@ -214,3 +214,34 @@ body{font-family:var(--font);letter-spacing:-.012em}
 
 /* Page content appears immediately on navigation; ambient motion stays continuous */
 #stage>.scene.page-reveal .section-heading,#stage>.scene.page-reveal .section-heading h1,#stage>.scene.page-reveal .section-heading h2,#stage>.scene.page-reveal .app-copy,#stage>.scene.page-reveal .app-copy h2,#stage>.scene.page-reveal .app-copy h3,#stage>.scene.page-reveal .about-copy,#stage>.scene.page-reveal .about-copy h2,#stage>.scene.page-reveal .chat-heading,#stage>.scene.page-reveal .chat-heading h2{animation-delay:0s!important}
+
+
+/* Balanced compact desktop viewport on phones: readable text, bounded previews */
+@media(min-width:701px) and (max-width:1100px){
+ .shell{max-width:100%;padding:0 16px;grid-template-rows:70px minmax(0,1fr) 76px}
+ .site-header{padding:0 12px}
+ .brand>span{font-size:24px}.brand small{font-size:9px}
+ .live-badge{font-size:13px}.live-badge small{font-size:10px}
+ .eyebrow,.intro-label,.projects-heading,.project-number,.project-type{font-size:11px}
+ h1{font-size:clamp(48px,7vw,72px)}h2{font-size:clamp(31px,4.5vw,44px)}
+ .hero-copy p,.app-copy>p:not(.eyebrow):not(.preview-note),.about-copy p,.chat-heading>p:last-child{font-size:clamp(14px,1.7vw,17px)}
+ .home-projects strong{font-size:clamp(17px,2.4vw,23px)}
+ .app-selector button{font-size:clamp(14px,1.8vw,19px)}
+ .app-selector button span,.app-copy .eyebrow{font-size:11px}
+ .apps-scene{padding:18px 22px;gap:13px}
+ .app-work{min-height:0;gap:12px}
+ .app-visual{flex:0 1 auto;min-height:0;max-height:min(48dvh,480px);padding:10px 15px}
+ .app-visual.has-screenshot{padding:0}
+ .app-visual img{max-height:100%;object-fit:contain}
+ .app-copy h3{font-size:clamp(29px,4vw,40px)}
+ .media-scene{padding:15px 20px;gap:12px}
+ .media-stage{flex:1;min-height:0;align-items:center}
+ .media-player{flex:0 1 auto;height:min(54dvh,560px);width:auto;max-width:100%;aspect-ratio:9/13}
+ .media-controls{flex-shrink:0}
+ .about-scene{padding:16px 20px;gap:15px}
+ .about-image{max-height:min(45dvh,480px);flex:0 1 auto}
+ .about-copy h2{font-size:clamp(33px,4.5vw,47px)}
+ .chat-scene{padding:15px 22px}
+ .chat-message,.chat-space{font-size:14px}
+ .dock button{font-size:13px}
+}

@@ -53,7 +53,7 @@ document.querySelectorAll('[data-app]').forEach(button=>button.addEventListener(
 document.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>{selectApp(Number(button.dataset.project));showPage('apps');}));selectApp(0);
 let mediaIndex=1;
 const mediaVideo=$('mediaVideo');
-mediaVideo.muted=true;mediaVideo.loop=true;mediaVideo.playsInline=true;mediaVideo.preload='auto';
+mediaVideo.muted=false;mediaVideo.loop=true;mediaVideo.playsInline=true;mediaVideo.preload='auto';
 const warmedVideos=new Map();
 const videoUrl=n=>'public/videos/karya-'+String(n).padStart(2,'0')+'.mp4?v='+videoCacheVersion;
 for(let n=1;n<=4;n++){
