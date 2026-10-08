@@ -393,3 +393,12 @@ body{font-family:var(--font);letter-spacing:-.012em}
  #stage>.media-scene .media-player{height:min(69dvh,760px)!important;max-height:none!important;width:min(90vw,430px)!important;max-width:90vw!important;aspect-ratio:9/16!important;flex:0 1 auto!important;transform:none!important;margin:0!important}
  #stage>.media-scene .media-side{display:none!important}
 }
+
+
+/* Karya: portrait video fills its frame without black side gutters */
+#stage>.media-scene .media-player{background:transparent!important;width:min(74dvh * 9 / 16,90vw)!important;aspect-ratio:9/16!important;overflow:hidden!important}
+#stage>.media-scene .media-player video{display:block;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;background:transparent!important}
+@media(max-width:700px){
+ #stage>.media-scene .media-player{width:min(90vw,430px)!important;height:min(69dvh,760px)!important;aspect-ratio:auto!important;background:transparent!important}
+ #stage>.media-scene .media-player video{object-fit:cover!important}
+}
