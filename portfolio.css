@@ -504,3 +504,21 @@ body{font-family:var(--font);letter-spacing:-.012em}
  #stage>.media-scene .media-layout .media-player video{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center top!important;transform:none!important}
  #stage>.media-scene .media-details{align-self:start!important;height:auto!important}
 }
+
+
+/* Editorial Karya overlay: full-height portrait footage and soft right fade */
+@media(max-width:700px){
+ #stage>.media-scene{position:relative!important;overflow:hidden!important}
+ #stage>.media-scene .media-layout{position:relative!important;display:block!important;flex:1 1 0%!important;min-height:0!important;height:auto!important;overflow:hidden!important}
+ #stage>.media-scene .media-layout .media-stage{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;display:block!important;overflow:hidden!important;z-index:0!important;pointer-events:none!important}
+ #stage>.media-scene .media-layout .media-player{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;display:block!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;pointer-events:none!important}
+ #stage>.media-scene .media-layout .media-player video{position:absolute!important;top:0!important;left:0!important;width:auto!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:left top!important;border-radius:0!important;transform:none!important;pointer-events:auto!important;-webkit-mask-image:linear-gradient(to right,#000 0%,#000 48%,rgba(0,0,0,.95) 59%,rgba(0,0,0,.45) 72%,transparent 88%)!important;mask-image:linear-gradient(to right,#000 0%,#000 48%,rgba(0,0,0,.95) 59%,rgba(0,0,0,.45) 72%,transparent 88%)!important}
+ #stage>.media-scene .media-layout .media-player video[hidden]{display:none!important}
+ #stage>.media-scene .media-details{position:absolute!important;top:0!important;right:0!important;width:44%!important;max-width:44%!important;height:auto!important;z-index:2!important;padding:7px 0 0 5px!important;gap:13px!important;background:transparent!important;pointer-events:auto!important}
+ #stage>.media-scene .media-pagination{gap:8px!important}
+ #stage>.media-scene .media-dots{gap:4px!important}
+ #stage>.media-scene .media-dots button{min-width:0!important;padding:0!important;font-size:11px!important}
+ #stage>.media-scene .media-description{background:transparent!important;border-top:1px solid rgba(255,160,220,.28)!important}
+ #stage>.media-scene .media-description h3{font-size:clamp(17px,4.3vw,23px)!important}
+ #stage>.media-scene .media-description>p:not(.eyebrow){font-size:clamp(12px,3vw,15px)!important;line-height:1.45!important}
+}
