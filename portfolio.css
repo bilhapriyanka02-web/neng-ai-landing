@@ -382,3 +382,14 @@ body{font-family:var(--font);letter-spacing:-.012em}
  #stage>.media-scene .media-side{flex:0 1 55px;max-width:55px;font-size:10px}
  #stage>.media-scene .media-side.right{display:none}
 }
+
+
+/* Restore original full-height Karya video presentation */
+#stage>.media-scene .media-stage{display:flex!important;justify-content:center!important;align-items:center!important;flex:1 1 auto!important;min-height:0!important}
+#stage>.media-scene .media-player{height:min(74dvh,800px)!important;max-height:none!important;width:auto!important;max-width:100%!important;aspect-ratio:9/16!important;flex:0 0 auto!important;transform:none!important;margin:0!important;border-radius:14px!important}
+#stage>.media-scene .media-player video{width:100%;height:100%;object-fit:contain}
+@media(max-width:700px){
+ #stage>.media-scene .media-stage{display:flex!important;justify-content:center!important;align-items:center!important;flex:1 1 auto!important;min-height:0!important}
+ #stage>.media-scene .media-player{height:min(69dvh,760px)!important;max-height:none!important;width:min(90vw,430px)!important;max-width:90vw!important;aspect-ratio:9/16!important;flex:0 1 auto!important;transform:none!important;margin:0!important}
+ #stage>.media-scene .media-side{display:none!important}
+}
