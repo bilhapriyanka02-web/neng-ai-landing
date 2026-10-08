@@ -245,3 +245,26 @@ body{font-family:var(--font);letter-spacing:-.012em}
  .chat-message,.chat-space{font-size:14px}
  .dock button{font-size:13px}
 }
+
+
+/* Compact browser viewport: fill screen without giant empty gaps */
+@media(min-width:701px) and (max-width:1100px){
+ .apps-scene{display:flex;flex-direction:column;justify-content:flex-start}
+ .app-work{flex:0 1 auto;align-items:start}
+ .app-visual{flex:none!important;height:clamp(230px,32dvh,420px)!important;max-height:32dvh!important}
+ .app-copy{flex:none}
+ .media-scene{justify-content:flex-start}
+ .media-stage{flex:0 1 auto;min-height:0;justify-content:center}
+ .media-player{height:clamp(270px,48dvh,540px)!important;max-height:48dvh!important}
+ .about-scene{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}
+ .about-image{flex:none!important;height:clamp(210px,31dvh,390px)!important;max-height:31dvh!important}
+ .about-copy{flex:none}
+ .chat-scene{max-width:760px}
+ .chat-heading h2{font-size:clamp(30px,4.5vw,42px)}
+ .chat-hint,.transcript,.voice-controls button{font-size:clamp(13px,1.6vw,16px)}
+}
+.contact-links{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 16px}
+.contact-links a{display:inline-flex;align-items:center;gap:7px;padding:9px 11px;border:1px solid rgba(250,66,173,.4);background:rgba(50,16,43,.82);border-radius:10px;color:#ffe7f4;font-size:12px;font-weight:700;text-decoration:none;min-height:38px}
+.contact-links img{width:19px;height:19px;object-fit:contain}
+.contact-links a:hover,.contact-links a:focus-visible{background:#79285f;border-color:#fa42ad}
+@media(max-width:700px){.contact-links{gap:6px}.contact-links a{font-size:11px;padding:7px 9px}.contact-links img{width:17px;height:17px}}
