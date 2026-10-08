@@ -186,3 +186,17 @@ body{font-family:var(--font);letter-spacing:-.012em}
 @keyframes nengAmbientOrbit{0%{transform:translate3d(-7%,5%,0) rotate(-16deg) scale(.94)}100%{transform:translate3d(6%,-5%,0) rotate(20deg) scale(1.09)}}
 @keyframes nengAmbientGlow{0%{opacity:.5;transform:translate3d(-3%,3%,0)}100%{opacity:1;transform:translate3d(4%,-4%,0)}}
 @media(prefers-reduced-motion:reduce){.scene:not(.home-scene)::before,.scene:not(.home-scene)::after{animation:none!important}}
+
+
+/* Fix ambient layers hidden behind the section background */
+.scene:not(.home-scene){position:relative;isolation:isolate;overflow:hidden}
+.scene:not(.home-scene)::before,.scene:not(.home-scene)::after{z-index:0;pointer-events:none}
+.scene:not(.home-scene)>*{position:relative;z-index:1}
+.scene:not(.home-scene)::before{
+ inset:8% -12% 9% 35%;
+ border:3px solid rgba(255,112,206,.7);
+ box-shadow:0 0 0 28px rgba(249,61,169,.13),0 0 0 65px rgba(249,61,169,.08),0 0 42px rgba(249,61,169,.4);
+}
+.scene:not(.home-scene)::after{
+ background:radial-gradient(ellipse 48% 42% at 75% 34%,rgba(255,66,184,.34),transparent 85%),radial-gradient(ellipse 45% 40% at 20% 82%,rgba(255,95,194,.22),transparent 85%);
+}
