@@ -213,4 +213,4 @@ body{font-family:var(--font);letter-spacing:-.012em}
 @media(prefers-reduced-motion:reduce){#stage>.ambient-global *{animation:none!important}}
 
 /* Page content appears immediately on navigation; ambient motion stays continuous */
-#stage>.scene.page-reveal *,#stage>.scene.page-reveal *::before,#stage>.scene.page-reveal *::after{animation-delay:0s!important;animation-duration:0s!important}
+#stage>.scene.page-reveal .section-heading,#stage>.scene.page-reveal .section-heading h1,#stage>.scene.page-reveal .section-heading h2,#stage>.scene.page-reveal .app-copy,#stage>.scene.page-reveal .app-copy h2,#stage>.scene.page-reveal .app-copy h3,#stage>.scene.page-reveal .about-copy,#stage>.scene.page-reveal .about-copy h2,#stage>.scene.page-reveal .chat-heading,#stage>.scene.page-reveal .chat-heading h2{animation-delay:0s!important}
