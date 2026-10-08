@@ -313,3 +313,27 @@ body{font-family:var(--font);letter-spacing:-.012em}
 
 /* Route visibility must override page-specific !important display rules */
 #stage > section.scene[hidden]{display:none!important;visibility:hidden!important}
+
+
+/* Neng AI signature navigation: editorial rail, not app-style tiles */
+.dock{display:flex;align-items:stretch;gap:clamp(2px,.8vw,12px);padding:4px 2px;isolation:isolate}
+.dock button,.dock button.active{position:relative;flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px 5px 9px;border:0;border-radius:0;background:transparent!important;box-shadow:none!important;color:#b9a1b8;transition:color .2s ease}
+.dock button::before{content:"";position:absolute;top:0;left:22%;right:22%;height:2px;background:linear-gradient(90deg,transparent,#ff64b9,transparent);transform:scaleX(0);opacity:0;transition:transform .25s,opacity .25s}
+.dock button.active{color:#ff83cb!important}
+.dock button.active::before{transform:scaleX(1);opacity:1}
+.dock button svg{width:clamp(21px,2.5vw,27px);height:clamp(21px,2.5vw,27px);stroke-width:1.55;fill:none;stroke:currentColor;transition:transform .2s ease}
+.dock button.active svg{transform:translateY(-2px);filter:drop-shadow(0 0 7px #f447a466)}
+.dock button span{font-size:clamp(10px,1.1vw,12px);font-weight:650;letter-spacing:.015em}
+.dock button:active svg{transform:scale(.88)}
+.dock button:focus-visible{outline:2px solid #ff83cb;outline-offset:-3px}
+@media(hover:hover){.dock button:hover{color:#ffe1f2}}
+@media(max-width:700px){.dock{gap:0}.dock button,.dock button.active{padding:9px 1px 8px}.dock button span{font-size:11px}}
+
+/* Karya: flowing directional controls instead of rectangular action cards */
+.media-arrows{display:flex;align-items:center;gap:clamp(8px,2vw,22px)}
+.media-arrows button,.media-arrows #nextMedia{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;flex:1;min-width:0;min-height:48px;padding:10px 15px!important;border:1px solid #a74a83!important;border-radius:999px!important;background:rgba(45,13,40,.58)!important;color:#ffe1f2!important;font-size:clamp(12px,1.4vw,15px)!important;font-weight:750;letter-spacing:.015em;box-shadow:none!important;transition:background .2s,border-color .2s,transform .2s}
+.media-arrows #nextMedia{background:linear-gradient(110deg,#f55aad,#f939a1)!important;color:#290d23!important;border-color:transparent!important}
+.media-arrows button span{font-size:24px;line-height:1;transition:transform .2s}
+.media-arrows button:active{transform:scale(.98)}
+@media(hover:hover){.media-arrows button:hover{border-color:#ff91cf!important}.media-arrows button:hover span{transform:translateX(-4px)}.media-arrows #nextMedia:hover span{transform:translateX(4px)}}
+@media(max-width:700px){.media-arrows{gap:9px}.media-arrows button,.media-arrows #nextMedia{min-height:46px;padding:9px 13px!important;font-size:12px!important}}
