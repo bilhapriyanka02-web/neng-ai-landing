@@ -165,3 +165,24 @@ body{font-family:var(--font);letter-spacing:-.012em}
 
 /* Tight continuous visitor lettering: keep paw stamp unchanged */
 .visitor-paw-widget .visitor-ring text{font-size:11px;letter-spacing:.25px}
+
+
+/* Visible, lightweight ambient motion behind page content */
+.scene:not(.home-scene){isolation:isolate}
+.scene:not(.home-scene)::before{
+ inset:10% -28% 8% 28%;
+ border:2px solid rgba(255,105,198,.35);
+ box-shadow:0 0 0 28px rgba(255,85,182,.07),0 0 0 68px rgba(255,85,182,.045),0 0 60px rgba(246,55,162,.16);
+ border-radius:42% 58% 64% 36% / 50% 44% 56% 50%;
+ animation:nengAmbientOrbit 16s ease-in-out infinite alternate;
+ will-change:transform;
+}
+.scene:not(.home-scene)::after{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(ellipse 34% 34% at 78% 22%,rgba(250,52,169,.21),transparent 85%),
+ radial-gradient(ellipse 45% 40% at 18% 85%,rgba(255,100,196,.14),transparent 85%);
+ animation:nengAmbientGlow 11s ease-in-out infinite alternate;
+}
+@keyframes nengAmbientOrbit{0%{transform:translate3d(-7%,5%,0) rotate(-16deg) scale(.94)}100%{transform:translate3d(6%,-5%,0) rotate(20deg) scale(1.09)}}
+@keyframes nengAmbientGlow{0%{opacity:.5;transform:translate3d(-3%,3%,0)}100%{opacity:1;transform:translate3d(4%,-4%,0)}}
+@media(prefers-reduced-motion:reduce){.scene:not(.home-scene)::before,.scene:not(.home-scene)::after{animation:none!important}}
