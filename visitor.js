@@ -2,9 +2,7 @@
  const popup=document.getElementById('visitorPopup');
  const count=document.getElementById('visitorCount');
  const caption=document.getElementById('visitorCaption');
- const close=document.getElementById('visitorClose');
  if(!popup || !count || !caption)return;
- close?.addEventListener('click',()=>{popup.hidden=true;});
  let visitorId;
  try{
   visitorId=localStorage.getItem('neng-visitor-id');
