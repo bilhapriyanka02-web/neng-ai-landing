@@ -1,3 +1,4 @@
+const videoCacheVersion=Date.now();
 // Keep uploads with the same filename fresh across page visits, while reusing
 // each downloaded image when navigating within the current visit.
 const freshImageUrl=path=>path;
@@ -54,7 +55,7 @@ let mediaIndex=1;
 const mediaVideo=$('mediaVideo');
 mediaVideo.muted=true;mediaVideo.loop=true;mediaVideo.playsInline=true;mediaVideo.preload='auto';
 function selectMedia(delta){$('mediaVideo').pause();mediaIndex=(mediaIndex-1+delta+4)%4+1;$('mediaNumber').textContent=String(mediaIndex).padStart(2,'0');$('filmIndex').textContent=String(mediaIndex).padStart(2,'0');$('mediaVideo').hidden=true;$('mediaPlaceholder').hidden=false;$('playMedia').hidden=false;$('mediaMessage').textContent='';$('mediaPlaceholder').dataset.variant=String(mediaIndex);document.querySelectorAll('[data-media]').forEach(button=>{const selected=Number(button.dataset.media)===mediaIndex;button.classList.toggle('selected',selected);button.setAttribute('aria-pressed',String(selected));});
- const videoPath='public/videos/karya-'+String(mediaIndex).padStart(2,'0')+'.mp4';
+ const videoPath='public/videos/karya-'+String(mediaIndex).padStart(2,'0')+'.mp4?v='+videoCacheVersion;
  if(mediaVideo.getAttribute('src')!==videoPath)mediaVideo.src=videoPath;
  mediaVideo.hidden=false;$('mediaPlaceholder').hidden=true;$('playMedia').hidden=true;
  if(!$('media').hidden)mediaVideo.play().catch(()=>{$('playMedia').hidden=false;});
