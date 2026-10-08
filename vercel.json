@@ -1,1 +1,18 @@
-{"headers":[{"source":"/api/live-token","headers":[{"key":"Cache-Control","value":"no-store"}]}]}
+{
+  "headers": [
+    {
+      "source": "/api/live-token",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "api/web-search.js": {
+      "maxDuration": 60
+    }
+  }
+}
