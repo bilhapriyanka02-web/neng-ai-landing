@@ -432,3 +432,41 @@ body{font-family:var(--font);letter-spacing:-.012em}
  border-color:rgba(252,116,195,.52)!important;
  box-shadow:inset 0 0 35px rgba(249,72,172,.14)!important;
 }
+
+
+/* Karya editorial split: frameless portrait at left, narrative at right */
+#stage>.media-scene{display:flex!important;flex-direction:column!important;gap:0!important;min-height:0!important;overflow:hidden!important}
+#stage>.media-scene .section-heading{flex:0 0 auto!important;margin-bottom:10px!important}
+#stage>.media-scene .media-layout{display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)!important;gap:clamp(12px,3vw,32px)!important;align-items:stretch!important;flex:1 1 auto!important;min-height:0!important;width:100%!important}
+#stage>.media-scene .media-layout .media-stage{display:flex!important;justify-content:flex-start!important;align-items:stretch!important;min-width:0!important;min-height:0!important;flex:none!important}
+#stage>.media-scene .media-layout .media-player{display:flex!important;position:relative!important;align-items:center!important;justify-content:center!important;flex:1 1 auto!important;width:100%!important;max-width:100%!important;height:100%!important;max-height:100%!important;min-height:0!important;aspect-ratio:auto!important;border:0!important;border-radius:18px!important;padding:0!important;margin:0!important;overflow:hidden!important;background:transparent!important;box-shadow:none!important;transform:none!important}
+#stage>.media-scene .media-layout .media-player video{display:block;width:100%!important;height:100%!important;object-fit:contain!important;object-position:left center!important;background:transparent!important;border-radius:16px!important}
+#stage>.media-scene .media-layout .media-player:before,#stage>.media-scene .media-layout .media-player:after{display:none!important}
+#stage>.media-scene .media-details{display:flex;flex-direction:column;justify-content:flex-start;gap:clamp(16px,3vh,32px);min-width:0;padding:clamp(8px,2vh,20px) 0}
+#stage>.media-scene .media-controls{display:flex!important;flex-direction:column!important;gap:clamp(12px,2vh,20px)!important;flex:none!important;padding:0!important;margin:0!important;border:0!important}
+#stage>.media-scene .media-pagination{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:12px!important;width:100%!important}
+#stage>.media-scene .media-dots{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important;width:100%!important}
+#stage>.media-scene .media-dots button{width:100%!important;min-width:0!important;height:38px!important;border-radius:12px!important}
+#stage>.media-scene .media-arrows{display:flex!important;flex-direction:column!important;gap:9px!important;width:100%!important}
+#stage>.media-scene .media-arrows button{width:100%!important;min-height:43px!important;border-radius:14px!important;padding:10px 13px!important;justify-content:space-between!important;font-size:clamp(11px,1.5vw,15px)!important}
+#stage>.media-scene .media-description{border-top:1px solid rgba(251,128,201,.35);padding-top:clamp(13px,2.5vh,24px);max-width:430px}
+#stage>.media-scene .media-description h3{font-size:clamp(17px,2.4vw,28px);line-height:1.13;letter-spacing:-.04em;margin:10px 0}
+#stage>.media-scene .media-description>p:not(.eyebrow){font-size:clamp(12px,1.4vw,16px);line-height:1.55;color:#ead4e3;margin:0}
+#stage>.media-scene .media-story-footer{display:block;margin-top:20px;font-size:9px;letter-spacing:.15em;color:#ca9cbb}
+@media(max-width:700px){
+ #stage>.media-scene{padding:12px 12px 4px!important}
+ #stage>.media-scene .section-heading{margin-bottom:8px!important}
+ #stage>.media-scene .section-heading h2{font-size:clamp(24px,6vw,32px)!important}
+ #stage>.media-scene .media-layout{grid-template-columns:minmax(0,54fr) minmax(0,46fr)!important;gap:11px!important}
+ #stage>.media-scene .media-layout .media-player{border-radius:13px!important}
+ #stage>.media-scene .media-layout .media-player video{border-radius:12px!important}
+ #stage>.media-scene .media-details{gap:clamp(12px,2vh,20px);padding:6px 0}
+ #stage>.media-scene .media-pagination{gap:9px!important}
+ #stage>.media-scene .media-pagination>span{font-size:11px!important}
+ #stage>.media-scene .media-dots{gap:4px!important}
+ #stage>.media-scene .media-dots button{height:33px!important;border-radius:10px!important;font-size:11px!important}
+ #stage>.media-scene .media-arrows button{min-height:41px!important;padding:8px 9px!important;font-size:11px!important}
+ #stage>.media-scene .media-description h3{font-size:clamp(17px,4.5vw,23px)}
+ #stage>.media-scene .media-description>p:not(.eyebrow){font-size:clamp(11px,2.9vw,13px);line-height:1.45}
+ #stage>.media-scene .media-story-footer{font-size:8px;margin-top:13px}
+}
