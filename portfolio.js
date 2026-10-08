@@ -1,3 +1,10 @@
+// Keep uploads with the same filename fresh across page visits, while reusing
+// each downloaded image when navigating within the current visit.
+const imageVisitVersion=Date.now().toString(36);
+const freshImageUrl=path=>path+'?v='+imageVisitVersion;
+document.querySelectorAll('img[data-refresh-image]').forEach(image=>{
+ image.src=freshImageUrl(image.dataset.refreshImage);
+});
 const $ = id => document.getElementById(id);
 const pages = ['home','apps','media','about','chat'];
 function showPage(name) {
@@ -24,12 +31,12 @@ function loadAppScreenshot(app){
  const screenshot=new Image();screenshot.alt='Screenshot '+app.name;screenshot.decoding='async';
  screenshot.onload=()=>{
   if(request!==previewRequest)return;
-  const link=document.createElement('a');link.href=app.image;link.target='_blank';link.rel='noopener noreferrer';link.className='app-screenshot-link';link.setAttribute('aria-label','Buka screenshot '+app.name+' ukuran penuh');link.append(screenshot);
+  const link=document.createElement('a');link.href=screenshot.src;link.target='_blank';link.rel='noopener noreferrer';link.className='app-screenshot-link';link.setAttribute('aria-label','Buka screenshot '+app.name+' ukuran penuh');link.append(screenshot);
   visual.replaceChildren(link);visual.classList.add('has-screenshot');visual.removeAttribute('aria-hidden');
   note.textContent='Screenshot aplikasi · Ketuk gambar untuk ukuran penuh';
  };
  screenshot.onerror=()=>{};
- screenshot.src=app.image;
+ screenshot.src=freshImageUrl(app.image);
 }
 function selectApp(index){const app=apps[index];$('appCategory').textContent=app.category;$('appName').textContent=app.name;$('appDescription').textContent=app.description;$('appLink').hidden=!app.url;$('appPrivate').hidden=!!app.url;if(app.url)$('appLink').href=app.url;else $('appLink').removeAttribute('href');$('appFeatures').replaceChildren(...app.features.map(text=>{const el=document.createElement('span');el.textContent=text;return el;}));$('appVisual').style.background=app.color;$('appVisual').innerHTML='<div class="mock '+app.mock+'"><div class="mock-header"><span>'+app.label+'</span>'+(index===0?'<img src="public/images/panda-head.png" alt="">':'<span>···</span>')+'</div><p class="mock-kicker">YOUR NEXT IDEA STARTS HERE.</p><div class="mock-title">'+app.title+'</div><div class="mock-tools">'+app.tools.map(text=>'<span>'+text+'</span>').join('')+'</div>'+(index===1?'<div class="mock-input">Tanyakan apa saja… <b>↑</b></div>':'')+'</div>';loadAppScreenshot(app);document.querySelectorAll('[data-app]').forEach(button=>{const selected=Number(button.dataset.app)===index;button.classList.toggle('selected',selected);button.setAttribute('aria-pressed',String(selected));});}
 document.querySelectorAll('[data-app]').forEach(button=>button.addEventListener('click',()=>selectApp(Number(button.dataset.app))));

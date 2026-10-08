@@ -44,3 +44,7 @@ Upload file JPG ke folder **public/images/** di repo ini:
 - **beauty-content-automation.jpg** — Beauty Content Automation (privat; tanpa tautan akses)
 
 Gunakan nama file persis, huruf kecil. Upload gambar JPG asli (jangan hanya mengganti ekstensi PNG menjadi JPG), lalu commit ke main. Sesudah deployment selesai, screenshot otomatis menggantikan ilustrasi. Foto tampil utuh tanpa dipotong; ketuk screenshot untuk membuka ukuran penuh. Jika belum tersedia atau gagal dimuat, ilustrasi tetap tampil. Untuk mengganti lagi, upload file baru dengan nama yang sama.
+
+## Foto setelah diganti
+
+Foto utama, foto Tentang, dan screenshot aplikasi memakai versi URL baru setiap kali halaman dibuka atau dimuat ulang. Setelah upload dengan nama file yang sama dan deployment selesai, cukup refresh halaman; tidak perlu menghapus cache browser. File gambar asli tidak diubah.
