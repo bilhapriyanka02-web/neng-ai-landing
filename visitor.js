@@ -21,6 +21,23 @@
   }catch{count.textContent='Statistik belum tersedia';caption.textContent='Coba lagi nanti';}
  }
  refresh(true);
+ // Drift between unobtrusive positions, always clear of the top header.
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const move=()=>{
+   if(popup.hidden)return;
+   const size=popup.getBoundingClientRect().width||122;
+   const minY=Math.max(170,innerHeight*.35);
+   const maxX=Math.max(12,innerWidth-size-12);
+   const maxY=Math.max(minY,innerHeight-size-95);
+   popup.style.right='auto';popup.style.bottom='auto';
+   popup.style.left=(12+Math.random()*Math.max(0,maxX-12))+'px';
+   popup.style.top=(minY+Math.random()*Math.max(0,maxY-minY))+'px';
+  };
+  setTimeout(move,1400);
+  const drift=setInterval(()=>{if(!document.hidden)move()},7500);
+  addEventListener('pagehide',()=>clearInterval(drift),{once:true});
+ }
+
  const timer=setInterval(()=>{if(!document.hidden)refresh();},15000);
  addEventListener('pagehide',()=>clearInterval(timer),{once:true});
 })();

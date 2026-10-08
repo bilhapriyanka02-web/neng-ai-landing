@@ -144,3 +144,18 @@ body{font-family:var(--font);letter-spacing:-.012em}
 .visitor-mark img{display:block;width:82%;height:82%;object-fit:contain;animation:nengPawPulse 2.8s ease-in-out infinite}
 @keyframes nengPawPulse{0%,100%{transform:scale(1) rotate(-8deg)}50%{transform:scale(1.16) rotate(8deg)}}
 @media(prefers-reduced-motion:reduce){.visitor-mark img{animation:none!important}}
+
+
+/* Compact floating panda paw visitor counter */
+.visitor-paw-widget{position:fixed;top:auto;left:auto;right:16px;bottom:110px;width:150px;height:150px;min-height:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;display:block;overflow:visible;transition:left 5s ease-in-out,top 5s ease-in-out;animation:nengPopupIn .65s ease-out both;pointer-events:none}
+.visitor-paw-widget .visitor-ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible;animation:nengVisitorOrbit 18s linear infinite;filter:drop-shadow(0 1px 4px #1b0b18)}
+.visitor-paw-widget .visitor-ring text{fill:#ffd4ec;font:800 10px 'Plus Jakarta Sans',sans-serif;letter-spacing:1.4px}
+.visitor-paw-widget .visitor-mark{position:absolute;inset:24px;width:auto;height:auto;border-radius:0;background:none;animation:none;filter:drop-shadow(0 4px 9px #19071b)}
+.visitor-paw-widget .visitor-mark img{width:100%;height:100%;object-fit:contain;animation:nengPawPulse 3s ease-in-out infinite}
+.visitor-paw-widget .visitor-copy{position:absolute;inset:50px 33px;display:flex;align-items:center;justify-content:center;gap:0;pointer-events:none;text-shadow:0 2px 7px #160617,0 0 3px #160617}
+.visitor-paw-widget .visitor-copy strong{font:900 28px 'Plus Jakarta Sans',sans-serif;color:white;line-height:1.1;max-width:90px;overflow:hidden;text-overflow:ellipsis}
+.visitor-paw-widget .visitor-copy small{display:none}
+.visitor-paw-widget .visitor-close{position:absolute;top:9px;right:9px;width:27px;height:27px;display:grid;place-items:center;border-radius:50%;background:#37132b;color:white;font-size:20px;pointer-events:auto;z-index:2}
+@keyframes nengVisitorOrbit{to{transform:rotate(360deg)}}
+@media(max-width:700px){.visitor-paw-widget{top:auto;left:auto;right:12px;bottom:100px;width:122px;height:122px;min-height:0;padding:0;border-radius:0}.visitor-paw-widget .visitor-mark{inset:20px;width:auto;height:auto}.visitor-paw-widget .visitor-copy{inset:40px 26px}.visitor-paw-widget .visitor-copy strong{font-size:23px}.visitor-paw-widget .visitor-ring text{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.visitor-paw-widget,.visitor-paw-widget .visitor-ring,.visitor-paw-widget .visitor-mark img{animation:none!important;transition:none!important}}
