@@ -162,3 +162,6 @@ body{font-family:var(--font);letter-spacing:-.012em}
 
 /* Magenta AI accent in navbar wordmark */
 .brand .brand-ai{font-style:normal;color:#fa42ad}
+
+/* Tight continuous visitor lettering: keep paw stamp unchanged */
+.visitor-paw-widget .visitor-ring text{font-size:11px;letter-spacing:.25px}
