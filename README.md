@@ -2,7 +2,7 @@
 
 Website utama: https://neng-ai.cloud
 
-Portfolio HTML/CSS/JS, satu layar dengan navigasi antar bagian. Github Pages melayani domain utama; Vercel project **neng-ai-portfolio** menjalankan endpoint server /api/live-token. Aplikasi Neng-app, Aster Assistant, dan Aster Gateway tetap terpisah.
+Portfolio HTML/CSS/JS, satu layar dengan navigasi antar bagian. Github Pages melayani domain utama; Vercel project **neng-ai-portfolio** menjalankan endpoint server /api/live-token. Aplikasi Neng-app, Aster Assistant, Aster Gateway, dan Beauty Content Automation tetap terpisah. Beauty Content Automation ditampilkan sebagai aplikasi privat tanpa tautan akses.
 
 ## Mengaktifkan Neng Live
 
@@ -29,7 +29,7 @@ Disarankan MP4 H.264/AAC. Video tampil saat tombol putar ditekan. Jika belum diu
 
 ## Assets
 
-Header menggunakan panda-head.png dari neng-app. Foto Neng diambil dari landing page sebelumnya. Preview ketiga aplikasi merupakan ilustrasi antarmuka, bukan screenshot terbaru.
+Header menggunakan panda-head.png dari neng-app. Foto Neng diambil dari landing page sebelumnya. Preview aplikasi menggunakan screenshot dari public/images jika tersedia, dengan ilustrasi sebagai pengganti jika gambar belum tersedia.
 
 ## Catatan operasional
 
@@ -41,5 +41,6 @@ Upload file JPG ke folder **public/images/** di repo ini:
 - **neng-app.jpg** — Neng-app
 - **aster-assistant.jpg** — Aster Assistant
 - **aster-gateway.jpg** — Aster Gateway
+- **beauty-content-automation.jpg** — Beauty Content Automation (privat; tanpa tautan akses)
 
 Gunakan nama file persis, huruf kecil. Upload gambar JPG asli (jangan hanya mengganti ekstensi PNG menjadi JPG), lalu commit ke main. Sesudah deployment selesai, screenshot otomatis menggantikan ilustrasi. Foto tampil utuh tanpa dipotong; ketuk screenshot untuk membuka ukuran penuh. Jika belum tersedia atau gagal dimuat, ilustrasi tetap tampil. Untuk mengganti lagi, upload file baru dengan nama yang sama.

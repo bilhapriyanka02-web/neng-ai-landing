@@ -3,6 +3,7 @@ Upload screenshot aplikasi sebagai JPG dengan nama berikut:
 neng-app.jpg
 aster-assistant.jpg
 aster-gateway.jpg
+beauty-content-automation.jpg
 
 Commit ke main. Setelah deployment selesai gambar otomatis tampil.
 Jika belum diupload, ilustrasi tetap tampil.
