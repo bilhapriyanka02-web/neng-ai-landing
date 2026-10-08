@@ -86,3 +86,16 @@ body{font-family:var(--font);letter-spacing:-.012em}
  .media-arrows{width:100%;flex:none;gap:8px}
  .media-arrows button{min-height:39px;padding:0 12px;font-size:11px}
 }
+
+
+/* Mobile type scale correction: preserve editorial character without crowding */
+@media(max-width:700px){
+ .brand>span{font-size:20px;letter-spacing:-.055em}
+ h1{font-size:clamp(36px,10vw,48px);letter-spacing:-.065em;line-height:1.01;max-width:100%}
+ .hero-copy{right:18px}
+ .hero-copy p{font-size:11px}
+ .home-projects strong{font-size:clamp(13px,3.7vw,16px);letter-spacing:-.045em;line-height:1.13;overflow-wrap:normal}
+ .home-projects button{grid-template-columns:20px minmax(0,1fr) auto 16px;gap:7px}
+ .project-type{font-size:8px}
+ .media-scene h2{font-size:26px}
+}
