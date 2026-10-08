@@ -402,3 +402,18 @@ body{font-family:var(--font);letter-spacing:-.012em}
  #stage>.media-scene .media-player{width:min(90vw,430px)!important;height:min(69dvh,760px)!important;aspect-ratio:auto!important;background:transparent!important}
  #stage>.media-scene .media-player video{object-fit:cover!important}
 }
+
+
+/* Preserve every pixel of Karya videos; style the unused side space, never crop */
+#stage>.media-scene .media-player{
+ background:radial-gradient(ellipse at 50% 48%,rgba(153,44,116,.55),rgba(73,21,67,.9) 58%,#29122d 100%)!important;
+ box-shadow:inset 0 0 55px rgba(249,66,173,.14),0 15px 35px #13051b55!important;
+}
+#stage>.media-scene .media-player video{
+ object-fit:contain!important;
+ object-position:center center!important;
+ background:transparent!important;
+}
+@media(max-width:700px){
+ #stage>.media-scene .media-player video{object-fit:contain!important}
+}
