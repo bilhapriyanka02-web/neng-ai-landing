@@ -546,3 +546,30 @@ body{font-family:var(--font);letter-spacing:-.012em}
    transform:none!important;
  }
 }
+
+
+/* Mobile application screenshots follow actual image dimensions and viewport width.
+   Never size the preview with viewport height, a fixed aspect ratio or absolute fill. */
+@media(max-width:700px){
+ #stage>.apps-scene .app-work{display:flex!important;flex-direction:column!important;width:100%!important;min-width:0!important}
+ #stage>.apps-scene .app-visual.has-screenshot{
+   display:block!important;position:relative!important;width:100%!important;
+   height:auto!important;min-height:0!important;max-height:none!important;
+   aspect-ratio:auto!important;padding:clamp(7px,2vw,12px)!important;
+   box-sizing:border-box!important;overflow:visible!important;
+ }
+ #stage>.apps-scene .app-visual.has-screenshot>.app-screenshot-link{
+   position:relative!important;inset:auto!important;display:block!important;
+   width:100%!important;height:auto!important;min-width:0!important;
+   min-height:0!important;max-height:none!important;aspect-ratio:auto!important;
+   padding:clamp(5px,1.5vw,9px)!important;box-sizing:border-box!important;
+   overflow:hidden!important;
+ }
+ #stage>.apps-scene .app-visual.has-screenshot>.app-screenshot-link>img{
+   position:relative!important;inset:auto!important;display:block!important;
+   width:100%!important;height:auto!important;min-width:0!important;
+   min-height:0!important;max-width:100%!important;max-height:none!important;
+   aspect-ratio:auto!important;object-fit:contain!important;
+   transform:none!important;margin:0!important;
+ }
+}
