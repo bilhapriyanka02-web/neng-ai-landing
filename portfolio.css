@@ -139,3 +139,8 @@ body{font-family:var(--font);letter-spacing:-.012em}
 @keyframes nengPageRise{from{opacity:0;transform:translateY(17px)}to{opacity:1;transform:translateY(0)}}
 @keyframes nengPageTitle{from{opacity:0;transform:translateY(24px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
 @media(prefers-reduced-motion:reduce){.page-reveal .section-heading,.page-reveal .app-copy,.page-reveal .about-copy,.page-reveal .chat-heading,.page-reveal .media-controls,.page-reveal .home-projects,.page-reveal .section-heading h1,.page-reveal .section-heading h2,.page-reveal .app-copy h2,.page-reveal .app-copy h3,.page-reveal .about-copy h2,.page-reveal .chat-heading h2{animation:none!important}}
+
+/* Neng-app panda paw in visitor counter */
+.visitor-mark img{display:block;width:82%;height:82%;object-fit:contain;animation:nengPawPulse 2.8s ease-in-out infinite}
+@keyframes nengPawPulse{0%,100%{transform:scale(1) rotate(-8deg)}50%{transform:scale(1.16) rotate(8deg)}}
+@media(prefers-reduced-motion:reduce){.visitor-mark img{animation:none!important}}
