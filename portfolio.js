@@ -1,4 +1,4 @@
-const videoCacheVersion=Date.now();
+const videoCacheVersion="07a4-067f-8bd6-23a9";
 // Keep uploads with the same filename fresh across page visits, while reusing
 // each downloaded image when navigating within the current visit.
 const freshImageUrl=path=>path;
@@ -54,8 +54,16 @@ document.querySelectorAll('[data-project]').forEach(button=>button.addEventListe
 let mediaIndex=1;
 const mediaVideo=$('mediaVideo');
 mediaVideo.muted=true;mediaVideo.loop=true;mediaVideo.playsInline=true;mediaVideo.preload='auto';
+const warmedVideos=new Map();
+const videoUrl=n=>'public/videos/karya-'+String(n).padStart(2,'0')+'.mp4?v='+videoCacheVersion;
+for(let n=1;n<=4;n++){
+ fetch(videoUrl(n)).then(r=>{if(!r.ok)throw Error('video');return r.blob()}).then(blob=>{
+  warmedVideos.set(n,URL.createObjectURL(blob));
+ }).catch(()=>{});
+}
+addEventListener('pagehide',()=>{for(const url of warmedVideos.values())URL.revokeObjectURL(url)},{once:true});
 function selectMedia(delta){$('mediaVideo').pause();mediaIndex=(mediaIndex-1+delta+4)%4+1;$('mediaNumber').textContent=String(mediaIndex).padStart(2,'0');$('filmIndex').textContent=String(mediaIndex).padStart(2,'0');$('mediaVideo').hidden=true;$('mediaPlaceholder').hidden=false;$('playMedia').hidden=false;$('mediaMessage').textContent='';$('mediaPlaceholder').dataset.variant=String(mediaIndex);document.querySelectorAll('[data-media]').forEach(button=>{const selected=Number(button.dataset.media)===mediaIndex;button.classList.toggle('selected',selected);button.setAttribute('aria-pressed',String(selected));});
- const videoPath='public/videos/karya-'+String(mediaIndex).padStart(2,'0')+'.mp4?v='+videoCacheVersion;
+ const videoPath=warmedVideos.get(mediaIndex)||videoUrl(mediaIndex);
  if(mediaVideo.getAttribute('src')!==videoPath)mediaVideo.src=videoPath;
  mediaVideo.hidden=false;$('mediaPlaceholder').hidden=true;$('playMedia').hidden=true;
  if(!$('media').hidden)mediaVideo.play().catch(()=>{$('playMedia').hidden=false;});
@@ -64,7 +72,7 @@ $('mediaPlaceholder').dataset.variant='1';
 selectMedia(0);
 document.querySelectorAll('[data-media]').forEach(button=>button.addEventListener('click',()=>selectMedia(Number(button.dataset.media)-mediaIndex)));
 $('nextMedia').addEventListener('click',()=>selectMedia(1));$('previousMedia').addEventListener('click',()=>selectMedia(-1));
-$('playMedia').addEventListener('click',()=>{const video=$('mediaVideo');video.src='public/videos/karya-'+String(mediaIndex).padStart(2,'0')+'.mp4';video.hidden=false;$('mediaPlaceholder').hidden=true;$('playMedia').hidden=true;video.muted=false;video.controls=true;video.play().catch(()=>{});});
+$('playMedia').addEventListener('click',()=>{const video=$('mediaVideo');video.src=warmedVideos.get(mediaIndex)||videoUrl(mediaIndex);video.hidden=false;$('mediaPlaceholder').hidden=true;$('playMedia').hidden=true;video.muted=false;video.controls=true;video.play().catch(()=>{});});
 $('mediaVideo').addEventListener('error',()=>{$('mediaVideo').hidden=true;$('mediaPlaceholder').hidden=false;$('playMedia').hidden=false;$('mediaMessage').textContent='Video ini belum tersedia. Karya lainnya bisa kamu lihat di TikTok Neng.';});
 let story=0;
 const stories=[
