@@ -200,3 +200,17 @@ body{font-family:var(--font);letter-spacing:-.012em}
 .scene:not(.home-scene)::after{
  background:radial-gradient(ellipse 48% 42% at 75% 34%,rgba(255,66,184,.34),transparent 85%),radial-gradient(ellipse 45% 40% at 20% 82%,rgba(255,95,194,.22),transparent 85%);
 }
+
+
+/* Persistent ambient layer: never remounts during tab navigation */
+#stage{position:relative;isolation:isolate;overflow:hidden}
+#stage>.ambient-global{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+#stage>.ambient-global .ambient-orbit{position:absolute;inset:8% -12% 9% 35%;border:3px solid rgba(255,112,206,.7);box-shadow:0 0 0 28px rgba(249,61,169,.13),0 0 0 65px rgba(249,61,169,.08),0 0 42px rgba(249,61,169,.4);border-radius:42% 58% 64% 36% / 50% 44% 56% 50%;animation:nengAmbientOrbit 16s ease-in-out infinite alternate;will-change:transform}
+#stage>.ambient-global .ambient-glow{position:absolute;inset:0;background:radial-gradient(ellipse 48% 42% at 75% 34%,rgba(255,66,184,.34),transparent 85%),radial-gradient(ellipse 45% 40% at 20% 82%,rgba(255,95,194,.22),transparent 85%);animation:nengAmbientGlow 11s ease-in-out infinite alternate;will-change:transform,opacity}
+#stage>.scene{position:relative;z-index:1;animation:none!important}
+#stage>.scene::before,#stage>.scene::after{display:none!important}
+#stage>.scene:not(.home-scene){isolation:auto}
+@media(prefers-reduced-motion:reduce){#stage>.ambient-global *{animation:none!important}}
+
+/* Page content appears immediately on navigation; ambient motion stays continuous */
+#stage>.scene.page-reveal *,#stage>.scene.page-reveal *::before,#stage>.scene.page-reveal *::after{animation-delay:0s!important;animation-duration:0s!important}
